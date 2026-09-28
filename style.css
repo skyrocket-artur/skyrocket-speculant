@@ -197,3 +197,5 @@ p + p { margin-top: 8px; }
 .btn.vio { background: var(--vio); color: #0f0826; box-shadow: 0 0 22px rgba(165,139,255,.25); }
 .btn.ghost { background: var(--panel2); color: var(--text); border-color: var(--line); }
 .btn.sq { flex: 0 0 56px; }
+.row2 { display: flex; gap: 8px; }
+.row2 .btn { padding: 13px 8px; font-size: 13px; }

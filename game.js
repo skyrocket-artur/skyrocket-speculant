@@ -10,9 +10,12 @@ const CONFIG = {
   mustInclude: ['r2020a', 'r2022a'],  // эпизоды, которые есть в каждой игре
   maxRebuys: 2,
   ctxCandles: 40, revCandles: 30,
-  // Кнопка в финале. {ending} заменится на код концовки: liq / loss / survive / profit / x_skill / x_luck
-  ctaText: 'Получить разбор ошибок в боте',
-  ctaUrl: 'https://t.me/speculant?start=game_{ending}',
+  // Кнопки в финале
+  ctaText: 'Разборы рынка в канале',
+  ctaUrl: 'https://t.me/YunusovArtur',
+  // «Позвать друга»: ссылка на бота (ChatPlace-автоматизация «/start speculant_share») + текст с результатом игрока
+  shareBotUrl: 'https://t.me/YunusovArtur_bot?start=speculant_share',
+  shareText: 'Я прошёл «Спекулянта» на {asset}: {title}, ×{mult} к депозиту 🚀 8 лет рынка с плечом — дойдёшь до иксов или до ликвидации?',
   // true — отправить результат боту через Telegram.WebApp.sendData (работает, только если игра открыта reply-кнопкой)
   sendData: false,
 };
@@ -726,23 +729,33 @@ function scrEnd() {
     ${suggest ? `<p class="sub center">Попробуй <b>${suggest.ticker}</b>: другие эпизоды, другие риски.</p>` : ''}
     <div class="sticky"><div class="sticky-in col">
       <button class="btn primary" data-act="cta">${esc(CONFIG.ctaText)}</button>
-      <button class="btn ghost" data-act="again">Сыграть снова</button>
+      <div class="row2"><button class="btn ghost" data-act="share">Позвать друга 🤝</button><button class="btn ghost" data-act="again">Сыграть снова</button></div>
     </div></div>
   </div>`);
   drawEquity(document.getElementById('eq'), G.equity, G.invLine);
   haptic(ending === 'liq' ? 'error' : 'success');
 }
 
-function cta() {
-  const e = G.ending;
-  const payload = { game: 'tochka_b', ending: e.id, asset: G.asset, mult: +e.mult.toFixed(2), skill: e.skill, luck: e.luck, style: e.arch, rebuys: G.rebuys };
-  if (CONFIG.sendData && tg && tg.initData) { try { tg.sendData(JSON.stringify(payload)); return; } catch (err) { /* fallback ниже */ } }
-  const url = CONFIG.ctaUrl.replace('{ending}', e.id);
+function openUrl(url) {
   try {
     if (tg && tg.initData && /^https:\/\/t\.me\//.test(url)) { tg.openTelegramLink(url); return; }
     if (tg && tg.initData) { tg.openLink(url); return; }
   } catch (err) { /* не в Telegram */ }
   window.open(url, '_blank');
+}
+
+function cta() {
+  const e = G.ending;
+  const payload = { game: 'speculant', ending: e.id, asset: G.asset, mult: +e.mult.toFixed(2), skill: e.skill, luck: e.luck, style: e.arch, rebuys: G.rebuys };
+  if (CONFIG.sendData && tg && tg.initData) { try { tg.sendData(JSON.stringify(payload)); return; } catch (err) { /* fallback ниже */ } }
+  openUrl(CONFIG.ctaUrl.replace('{ending}', e.id));
+}
+
+function share() {
+  const e = G.ending;
+  const text = CONFIG.shareText.replace('{asset}', A().ticker).replace('{title}', ENDINGS[e.id].title.toLowerCase())
+    .replace('{mult}', e.mult.toFixed(2).replace('.', ','));
+  openUrl(`https://t.me/share/url?url=${encodeURIComponent(CONFIG.shareBotUrl)}&text=${encodeURIComponent(text)}`);
 }
 
 /* =========================================================================
@@ -788,6 +801,7 @@ const ACT = {
   },
   stopGame: () => { G.brokeStop = true; scrEnd(); },
   cta: () => cta(),
+  share: () => share(),
   again: () => scrAsset(),
 };
 

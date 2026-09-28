@@ -36,18 +36,19 @@ python3 tools/fetch_prices.py && git commit -am "Обновление котир
 
 ## Настройка (`CONFIG` в `game.js`)
 
-- `ctaUrl` — ссылка кнопки в финале: `https://t.me/speculant?start=game_{ending}`.
-  `{ending}` → `liq`, `loss`, `survive`, `profit`, `x_skill`, `x_luck`. Бот получает `/start game_liq` и т.п. —
-  по этому параметру можно запускать разные цепочки.
+- `ctaUrl` — главная кнопка в финале (канал @YunusovArtur). Можно подставить `{ending}` —
+  код концовки: `liq`, `loss`, `survive`, `profit`, `x_skill`, `x_luck`.
+- `shareBotUrl`, `shareText` — кнопка «Позвать друга»: ссылка на @YunusovArtur_bot (`/start speculant_share`)
+  и текст с результатом игрока.
 - `sendData: true` — отправить результат JSON-ом через `Telegram.WebApp.sendData` (только если игра открыта reply-кнопкой).
 - `historicRounds` (11 из 15), `futureRounds` (3), `mustInclude` — длина и состав игры.
 - `startDeposit`, `maxRebuys` — экономика.
 
-## Подключение к боту
+## Воронка в боте
 
-1. Игра опубликована на GitHub Pages (адрес — в настройках репозитория → Pages).
-2. @BotFather → `/mybots` → бот → Bot Settings → Menu Button (или `/newapp`) → указать адрес игры.
-3. В ChatPlace — кнопка типа Web App с этим адресом.
+Бот @YunusovArtur_bot (ChatPlace), автоматизация «Сейф • Игра Спекулянт (/start speculant)»:
+запуск по ссылке `t.me/YunusovArtur_bot?start=speculant` или слову «СПЕКУЛЯНТ» → подписка на канал →
+кнопка «Играть» с адресом игры → напоминание через день.
 
 ## Локальный запуск
 
