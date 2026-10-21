@@ -11,8 +11,10 @@ const CONFIG = {
   maxRebuys: 2,
   ctxCandles: 40, revCandles: 30,
   // Кнопки в финале
-  ctaText: 'Разборы рынка в канале',
-  ctaUrl: 'https://t.me/YunusovArtur',
+  ctaText: 'Вступить в Skyrocket →',
+  ctaUrl: 'https://t.me/YunusovArtur_bot?start=speculant_end',   // бот: участнику «вы уже с нами», новому — условия набора
+  channelText: 'Разборы рынка в канале',
+  channelUrl: 'https://t.me/YunusovArtur',
   // «Позвать друга»: ссылка на бота (ChatPlace-автоматизация «/start speculant_share») + текст с результатом игрока
   shareBotUrl: 'https://t.me/YunusovArtur_bot?start=speculant_share',
   shareText: 'Я прошёл «Спекулянта» на {asset}: {title}, ×{mult} к депозиту 🚀 8 лет рынка с плечом — дойдёшь до иксов или до ликвидации?',
@@ -724,12 +726,18 @@ function scrEnd() {
       </div>
       <div class="lrows">${rows}</div>
     </div>
+    <div class="card join"><div class="k">РЕГИСТРАЦИЯ ОТКРЫТА</div>
+      <h3>Хочешь торговать не в симуляторе, а вместе со мной?</h3>
+      <p>В закрытом канале Skyrocket я публикую свои сделки в момент входа: актив, цена, размер позиции, стоп и цель. Есть закрытый чат и база знаний с курсом «От 1 к 100. Профессия трейдер».</p>
+      <button class="btn primary" data-act="cta">${esc(CONFIG.ctaText)}</button>
+      <button class="btn ghost" data-act="share">Поделиться результатом 🤝</button>
+    </div>
     <div class="card"><div class="k">ЧТО ДАЛЬШЕ</div>${E.next.map(x => `<p>${x}</p>`).join('')}</div>
     <div class="card"><div class="k">КОНСПЕКТ · ${G.lessons.length} УРОКОВ</div>${lessons}</div>
     ${suggest ? `<p class="sub center">Попробуй <b>${suggest.ticker}</b>: другие эпизоды, другие риски.</p>` : ''}
     <div class="sticky"><div class="sticky-in col">
       <button class="btn primary" data-act="cta">${esc(CONFIG.ctaText)}</button>
-      <div class="row2"><button class="btn ghost" data-act="share">Позвать друга 🤝</button><button class="btn ghost" data-act="again">Сыграть снова</button></div>
+      <div class="row2"><button class="btn ghost" data-act="share">Поделиться 🤝</button><button class="btn ghost" data-act="again">Сыграть снова</button></div>
     </div></div>
   </div>`);
   drawEquity(document.getElementById('eq'), G.equity, G.invLine);

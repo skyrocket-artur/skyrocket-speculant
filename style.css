@@ -199,3 +199,7 @@ p + p { margin-top: 8px; }
 .btn.sq { flex: 0 0 56px; }
 .row2 { display: flex; gap: 8px; }
 .row2 .btn { padding: 13px 8px; font-size: 13px; }
+
+/* финал: блок «Регистрация открыта» */
+.card.join { border-color: rgba(31,209,125,.45); background: linear-gradient(180deg, #0f1f18, var(--panel)); }
+.card.join .btn { width: 100%; margin-top: 10px; }
