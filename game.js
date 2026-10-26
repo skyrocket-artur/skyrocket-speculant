@@ -11,8 +11,8 @@ const CONFIG = {
   maxRebuys: 2,
   ctxCandles: 40, revCandles: 30,
   // Кнопки в финале
-  ctaText: 'Вступить в Skyrocket →',
-  ctaUrl: 'https://t.me/YunusovArtur_bot?start=speculant_end',   // бот: участнику «вы уже с нами», новому — условия набора
+  ctaText: 'Узнать про закрытый канал 🔒',
+  ctaUrl: 'https://t.me/YunusovArtur_bot?start=skyrocket_speculant',   // бот: участнику «вы уже с нами», новому — условия набора
   channelText: 'Разборы рынка в канале',
   channelUrl: 'https://t.me/YunusovArtur',
   // «Позвать друга»: ссылка на бота (ChatPlace-автоматизация «/start speculant_share») + текст с результатом игрока
@@ -726,9 +726,10 @@ function scrEnd() {
       </div>
       <div class="lrows">${rows}</div>
     </div>
-    <div class="card join"><div class="k">РЕГИСТРАЦИЯ ОТКРЫТА</div>
+    <div class="card join"><div class="k">ФИНАЛ ЛЕСТНИЦЫ · 7 ИЗ 7</div>
       <h3>Хочешь торговать не в симуляторе, а вместе со мной?</h3>
-      <p>В закрытом канале Skyrocket я публикую свои сделки в момент входа: актив, цена, размер позиции, стоп и цель. Есть закрытый чат и база знаний с курсом «От 1 к 100. Профессия трейдер».</p>
+      <p>Ты прошёл все уровни. Дальше — живой рынок. В закрытом канале Skyrocket я каждый день разбираю рынок и показываю свои сделки с логикой: актив, цена, размер позиции, стоп и цель. Есть эфиры, закрытый чат и база знаний с курсом «От 1 к 100. Профессия трейдер».</p>
+      <p>Регистрация сейчас закрыта: запишись в лист ожидания, и я напишу, когда она откроется.</p>
       <button class="btn primary" data-act="cta">${esc(CONFIG.ctaText)}</button>
       <button class="btn ghost" data-act="share">Поделиться результатом 🤝</button>
     </div>
